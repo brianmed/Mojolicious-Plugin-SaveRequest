@@ -11,16 +11,12 @@ our $VERSION = '0.01';
 sub register {
     my ($self, $app) = @_;
 
-    $DB::single = 1;
-
     $app->routes->add_condition(save => \&_save);
 }
 
 sub _save {
     my ($r, $c, $conf, $state_dir) = @_;
     
-    $DB::single = 1;
-
     my $abs_path = $c->app->home->abs_path;
     my $now = POSIX::strftime("%Y-%d-%m", localtime(time));
 
@@ -107,6 +103,7 @@ Mojolicious::Plugin::SaveRequest - Mojolicious Plugin
 
   # Save request state to $dir
   get '/' => (save => $dir) => sub {...};
+  $r->get('/')->over(save => "state")->to(controller => 'Index', action => 'slash');
 
 =head1 DESCRIPTION
 
