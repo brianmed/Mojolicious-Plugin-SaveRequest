@@ -6,7 +6,7 @@ use IO::File;
 use POSIX 'strftime';
 use Time::HiRes;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub register {
     my ($self, $app) = @_;
@@ -101,13 +101,21 @@ Mojolicious::Plugin::SaveRequest - Mojolicious Plugin
   # Mojolicious::Lite
   plugin 'SaveRequest';
 
-  # Save request state to $dir
+  # Save request state to $dir (relative to the absolute path of your app)
   get '/' => (save => $dir) => sub {...};
-  $r->get('/')->over(save => "state")->to(controller => 'Index', action => 'slash');
+  $r->get('/')->over(save => $dir)->to(controller => 'Index', action => 'slash');
 
 =head1 DESCRIPTION
 
 L<Mojolicious::Plugin::SaveRequest> is a L<Mojolicious> plugin.
+
+It saves the state of a request in a script that can be executed from
+the command-line at a later date.  In addition, the debugger can be used
+to step through a request.
+
+For example, run a saved request try:
+
+    /opt/perl state/2013-15-06/go.1371309475.241402.30552.00000000.pl script/the_app
 
 =head1 METHODS
 
