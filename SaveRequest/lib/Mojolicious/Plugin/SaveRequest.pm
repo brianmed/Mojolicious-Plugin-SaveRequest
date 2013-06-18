@@ -18,7 +18,7 @@ sub _save {
     my ($r, $c, $conf, $state_dir) = @_;
     
     my $abs_path = $c->app->home->abs_path;
-    my $now = POSIX::strftime("%Y-%d-%m", localtime(time));
+    my $now = POSIX::strftime("%Y-%m-%d", localtime(time));
 
     my $path = "$abs_path/$state_dir/$now";
     if (!-d $path) {
