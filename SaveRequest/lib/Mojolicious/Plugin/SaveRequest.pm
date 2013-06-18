@@ -6,7 +6,7 @@ use IO::File;
 use POSIX 'strftime';
 use Time::HiRes;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub register {
     my ($self, $app) = @_;
